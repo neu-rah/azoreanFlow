@@ -1,0 +1,24 @@
+#######################################
+# Syntax Coloring Map for NewSoftSerial
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+HP_MAX31855	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+readCelsius	KEYWORD2
+readFarenheit	KEYWORD2
+setVerbose	KEYWORD2
+getVerbose	KEYWORD2
+getError	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
