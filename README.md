@@ -2,12 +2,12 @@
 ## Project
 HP_ReflowSoldering  
 Hardware by Christophe Persoz on 19/01/2018  
-Software by Rui Avezedo  
+Software by Rui Azevedo  
 Licence GNU General Public License v3
 
 ## TODO
 
-* alarms
+* Alarms
 * Choosing existing profiles
 * Edit profiles
 * Select time or temp drive (guess i will kill temp. drive, testing)
@@ -21,7 +21,7 @@ Licence GNU General Public License v3
 * Wave Packet and Phase Fired control for AC outputs  
 * Use Zero Crossing SSR
 * Graphic TFT LC-Display, drawing the temperature curves using a 1.8" TFT or derivate display
-* ~~Controlled using a cheap rotary encoder and its~~ single button  
+* Controlled using a ~~cheap rotary encoder and its~~ single button  
 * ~~Stores up to 30 temperature profiles in EEPROM~~  (not yet)
 * Configurable PID-parameters (only in code)
 * Simple, small hardware to drive loads up to 400V and up to 6A  
