@@ -22,7 +22,7 @@ Licence All rights reserved
 ## Main Characteristics
 * 2 K-thermocouple input associated to MAX31588 HE SPI controller  
 * 2 SSR output (One for Heat Plate, the other for 12V Fan)  
-* ~~Rotary encoder with switch for user input  ~~
+* ~~Rotary encoder with switch for user input~~
 * TFT 1.8" HW SPI Color display for feedback and control  
 * Beeper for advertising  
 
