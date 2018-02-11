@@ -1,9 +1,12 @@
-# Azorean Hot Plate Reflow Soldering
-## Project
-HP_ReflowSoldering  
+# AzoreanFlow is a Hot Plate Reflow Soldering 
+## Project  
 Hardware by Christophe Persoz on 19/01/2018  
 Software by Rui Azevedo  
 Licence GNU General Public License v3
+
+## WARNING and DISCLAIMER 
+This project operates with possibly lethal AC voltage. If you are unsure what to do, don't do it and get help from an experienced tinkerer with professional training and skills.  
+
 
 ## TODO
 
