@@ -1,12 +1,19 @@
-# Hot Plate Reflow Soldering
+# azoreanFlow
 ## Project
-HP_ReflowSoldering  
+**Hot Plate Reflow Soldering**  
 Created by Christophe Persoz on 19/01/2018  
 Copyright © 2018 Christophe Persoz, Rui Avezedo  
 Licence All rights reserved  
 
+## TODO
 
-## References
+* alarms
+* Choosing existing profiles
+* Edit profiles
+* Select time or temp drive (guess i will kill temp. drive, testing)
+* Machine calibration
+* Ensure profile fits the machine (after callibration)
+* Store profiles
 
 ## Info
 #### This is an Arduino-based reflow plate controller with
@@ -15,7 +22,7 @@ Licence All rights reserved
 * Graphic TFT LC-Display, drawing the temperature curves using a 1.8" TFT or derivate display
 * ~~Controlled using a cheap rotary encoder and its~~ single button  
 * ~~Stores up to 30 temperature profiles in EEPROM~~  (not yet)
-* Configurable PID-parameters  
+* Configurable PID-parameters (only in code)
 * Simple, small hardware to drive loads up to 400V and up to 6A  
 * Hardware can measure two temperatures independently drive two AC loads, such as heater and fan
 
