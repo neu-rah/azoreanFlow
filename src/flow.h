@@ -58,13 +58,17 @@
     void start(double temp,unsigned long t=0) {
       // if(temp>TEMPERATURE_ROOM+5) return false;
       //TODO: check if target is in the slope diretion!
-      Serial<<"Sequence start"<<endl;
+#ifdef DEBUG
+        Serial<<"Sequence start"<<endl;
+#endif
       started=t;
       segmentStarted=t;
       idx=0;
       onTarget=false;
       entryPoint=temp;
-      report();
+#ifdef DEBUG
+        report();
+#endif
     }
     FlowSegment** segments;
     inline bool process(double temp,unsigned long t) {
@@ -85,7 +89,9 @@
         unsigned long l=seg->segTime(sp);
         if (t<=l) {
           point=sp+seg->getPoint(t);
-          if(idx!=i) report();
+#ifdef DEBUG
+            if(idx!=i) report();
+#endif
           return true;
         } else {
           sp=seg->target;
@@ -107,10 +113,14 @@
           //chain segments
           //entry point of next is the target of previous
           entryPoint=segments[idx-1]->target;
-          report();
+#ifdef DEBUG
+            report();
+#endif
           return true;
         } else idx--;
-		   Serial<<endl;
+#ifdef DEBUG
+          Serial<<endl;
+#endif
         return false;
       }
       return  true;
@@ -118,7 +128,9 @@
     bool segmentProcess(double temp,unsigned long t) {
       if (!onTarget) {
         if (segments[idx]->reached(temp)) {
-			  Serial<<" reached in "<<t/1000<<"s"<<endl;
+#ifdef DEBUG
+            Serial<<" reached in "<<t/1000<<"s"<<endl;
+#endif
           onTarget=true;
           segmentReached=t;
         } else point=entryPoint+segments[idx]->getPoint(t+updateTime);
@@ -136,12 +148,14 @@
     bool onTarget=false;//segment on target? if so applky segment duration
     unsigned long segmentStarted;//when was this segment started (ms)
     unsigned long segmentReached;//when segment target was reached
-    void report() {
-	    Serial<<"#"<<idx<<" "
-        <<segments[idx]->name
-        <<" slope:"<<segments[idx]->slope*1000.0
-        <<"ºC/s target:"<<segments[idx]->target;
-      if (driveMode==TimeDrived) Serial<<endl;
-    }
+#ifdef DEBUG
+      void report() {
+          Serial<<"#"<<idx<<" "
+          <<segments[idx]->name
+          <<" slope:"<<segments[idx]->slope*1000.0
+          <<"ºC/s target:"<<segments[idx]->target;
+          if (driveMode==TimeDrived) Serial<<endl;
+      }
+#endif
   };
 #endif

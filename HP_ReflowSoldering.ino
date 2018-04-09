@@ -51,8 +51,11 @@ void timerIsr() {_ENC.service();}
 
 void setup()
 {
+#ifdef DEBUG
     Serial.begin(115200);
-
+    while (!Serial) {}
+#endif
+    
     // SSR pin initialization to ensure reflow plate is off
     pinMode(HP_SSR, OUTPUT);
     digitalWrite(HP_SSR, HP_OFF);
@@ -62,6 +65,8 @@ void setup()
     //clickEncoder timer
     Timer1.initialize(1000);
     Timer1.attachInterrupt(timerIsr);
+    _ENC.setAccelerationEnabled(false);
+    _ENC.setDoubleClickEnabled(true);
 
     // Buzzer pin initialization to ensure annoying buzzer is off
     pinMode(BEEPER, OUTPUT);
@@ -85,13 +90,16 @@ void setup()
     // Shortly turn on SSR
     digitalWrite(HP_SSR, HP_ON);
     digitalWrite(FAN_SSR, FAN_ON);
-    tone(BEEPER,BEEP_FREQ,100);
+    tone(BEEPER,BEEP_FREQ,400);
 
     // Turn off SSR
     digitalWrite(HP_SSR, HP_OFF);
     digitalWrite(FAN_SSR, FAN_OFF);
 
     splash();
+#ifdef DEBUG
+    Serial<<"Click to start reflow..."<<endl;
+#endif
 }
 
 //do a reflow cycle
@@ -100,7 +108,9 @@ void loop(){
         case ClickEncoder::Clicked:
             run=true;
             reflow();
+#ifdef DEBUG
             Serial<<"Click to continue..."<<endl;
+#endif
             while(_ENC.getButton()!=ClickEncoder::Clicked);//wait for click at end
             splash();
             break;

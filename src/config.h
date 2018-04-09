@@ -13,7 +13,7 @@
   // #include "flow.h"
 
   // ***** CONSTANTS *****
-    #define VERSION "1.0"
+    #define VERSION "1.01"
     #define NAME    "azoreanREFLOW"
 
   #define FAN_ON LOW

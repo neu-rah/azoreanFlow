@@ -19,7 +19,9 @@ void readTemperature() {
 }
 
 void heatTo(double target,unsigned long e) {
-  Serial<<"Heating to "<<target;
+#ifdef DEBUG
+    Serial<<"Heating to "<<target;
+#endif
   digitalWrite(FAN_SSR, FAN_OFF);//ensure fan off
   // unsigned long e=flow.elapsedTime(now);
   while(input<target) {
@@ -32,11 +34,15 @@ void heatTo(double target,unsigned long e) {
     delay(100);
   };
   digitalWrite(HP_SSR, HP_OFF);
-  Serial<<" (done)"<<endl;
+#ifdef DEBUG
+    Serial<<" (done)"<<endl;
+#endif
 }
 
 void chillTo(double target,unsigned long e) {
-  Serial<<"Chilling to room "<<target;
+#ifdef DEBUG
+    Serial<<"Chilling to room "<<target;
+#endif
   digitalWrite(HP_SSR, HP_OFF);//ensure heater is off!
   // unsigned long e=flow.elapsedTime(now);
   while(input>TEMPERATURE_ROOM) {
@@ -49,12 +55,16 @@ void chillTo(double target,unsigned long e) {
     delay(100);
   };
   digitalWrite(FAN_SSR, FAN_OFF);
-  Serial<<" (done)"<<endl;
+#ifdef DEBUG
+    Serial<<" (done)"<<endl;
+#endif
 }
 
 void gotoTemp(double target,unsigned long e) {
   readTemperature();
-  Serial<<"read temp:"<<input<<endl;
+#ifdef DEBUG
+    Serial<<"read temp:"<<input<<endl;
+#endif
   if (input>target) chillTo(target,e);
   else if (input<target) heatTo(target,e);
 }
@@ -65,8 +75,9 @@ inline bool blink(double power,unsigned long now) {return power<(now%period);}
 void reflow() {
     // REFLOW //////////////////////////////////////////////////////////////////
     _TFT.clearScreen();
+#ifdef DEBUG
     Serial<<"Reflow start ---------------------"<<endl;
-
+#endif
     //plot curve preview
     plotPreview<5>(flow);
 
@@ -93,9 +104,17 @@ void reflow() {
         switch(_ENC.getButton()) {
             case ClickEncoder::Held:
                 run=false; //abort!
+#ifdef DEBUG
+                Serial<<"Aborting..."<<endl;
+#endif
+                
                 break;
             case ClickEncoder::DoubleClicked:
                 digitalWrite(FAN_SSR,!digitalRead(FAN_SSR));
+#ifdef DEBUG
+                Serial<<"Fan : "<<(digitalRead(FAN_SSR)?"OFF":"ON")<<endl;
+#endif
+                tone(BEEPER,BEEP_FREQ,100);
                 break;
         }
         now=getMillis();
@@ -126,8 +145,9 @@ void reflow() {
           else digitalWrite(HP_SSR,HP_OFF);
         }
   } while (run&&processing);
+#ifdef DEBUG
     Serial<<(run?"Terminated.":"Interrupted!")<<endl;
-
+#endif
     _RFLWPID.SetMode(MANUAL);
     _FANPID.SetMode(MANUAL);
     gotoTemp(TEMPERATURE_ROOM,flow.elapsedTime(now));
@@ -137,11 +157,15 @@ void reflow() {
 void splash() {
     _TFT.clearScreen();
     _TFT.setFont(ucg_font_helvB08_tf); // ucg_font_profont11_mr);
-    _TFT.setPrintPos(22,60);
+    _TFT.setPrintPos(22,56);
     _TFT.print(F(NAME));
     _TFT.print(" ");
     _TFT.print(F(VERSION));
+    _TFT.setPrintPos(22,80);
+    _TFT.print(F("Press to start reflow"));
+#ifdef DEBUG
     Serial<<NAME<<" "<<VERSION<<endl;
+#endif
     //now it stays there till clicked
     /*#ifdef Neurs
         delay(500);

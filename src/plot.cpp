@@ -69,7 +69,9 @@ void plot(double input,unsigned long t) {
 unsigned long plotSegment(FlowSegment& segment,double entry,unsigned long at,PlotType type) {
   uint8_t x=at/1000*PLOT_FACTOR_X;
   unsigned long l=segment.segTime(entry);
-  trace(Serial<<"segTime:"<<l<<endl);
+#ifdef DEBUG
+    trace(Serial<<"segTime:"<<l<<endl);
+#endif
   uint8_t _x=x+l/1000*PLOT_FACTOR_X;
   uint8_t y=120.0-entry/250*PLOT_FACTOR_Y;
   uint8_t _y=120.0-segment.target/250*PLOT_FACTOR_Y;

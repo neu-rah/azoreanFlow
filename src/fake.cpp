@@ -5,7 +5,9 @@ void fake_bounds() {
   if (fakeTemp<TEMPERATURE_ROOM/2)//lower bound
     fakeTemp=TEMPERATURE_ROOM/2;
   if (fakeTemp>300) {
-    Serial<<"ALERT TEMP:"<<fakeTemp<<endl;
+#ifdef DEBUG
+      Serial<<"ALERT TEMP:"<<fakeTemp<<endl;
+#endif
     delay(1000);
     fakeTemp=300;//upper bound
   }
