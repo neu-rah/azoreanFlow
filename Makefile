@@ -43,7 +43,7 @@ APP_LIBS_LIST = SPI EEPROM
 #	Streaming TeensyDmx TicksPerSecond TimerOne TimerThree U8g2 
 #	U8g_teensy U8glib USBHost Ucglib smoothAnalog streamFlow 
 #
-USER_LIBS_LIST = PID_v1 HP_MAX31855 ClickEncoder Ucglib streamFlow
+USER_LIBS_LIST = PID_v1 HP_MAX31855 ClickEncoder Ucglib streamFlow TimerOne
 
 # List local libraries here
 # !!! Help: http://bit.ly/2juEP91
