@@ -107,14 +107,14 @@ void reflow() {
 #ifdef DEBUG
                 Serial<<"Aborting..."<<endl;
 #endif
-                
+                tone(BEEPER,BEEP_FREQ,1200);
                 break;
             case ClickEncoder::DoubleClicked:
                 digitalWrite(FAN_SSR,!digitalRead(FAN_SSR));
 #ifdef DEBUG
                 Serial<<"Fan : "<<(digitalRead(FAN_SSR)?"OFF":"ON")<<endl;
 #endif
-                tone(BEEPER,BEEP_FREQ,100);
+                tone(BEEPER,BEEP_FREQ,500);
                 break;
         }
         now=getMillis();
@@ -152,6 +152,11 @@ void reflow() {
     _FANPID.SetMode(MANUAL);
     gotoTemp(TEMPERATURE_ROOM,flow.elapsedTime(now));
     run=false;
+    
+    delay(300);
+    tone(BEEPER,BEEP_FREQ,600);
+    delay(300);
+    tone(BEEPER,BEEP_FREQ,600);
 }
 
 void splash() {
